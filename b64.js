@@ -16,17 +16,26 @@
 
 module.exports = function(RED) {
     "use strict";
-
-    var btoa = require('btoa');
-    function B64Node(n) {
+    function B64EncodeNode(n) {
         RED.nodes.createNode(this,n);
         var node = this;
         this.on("input", function(msg) {
 		msg.original_payload=msg.payload;
-		msg.payload=btoa(msg.payload);
+		msg.payload=new Buffer(msg.payload).toString('base64');
           	node.send(msg);
         });
      	return node; 
    }
-   RED.nodes.registerType("bt64",B64Node);
+   function B64DecodeNode(n) {
+        RED.nodes.createNode(this,n);
+        var node = this;
+        this.on("input", function(msg) {
+                msg.original_payload=msg.payload;
+                msg.payload=new Buffer(msg.payload, 'base64').toString('utf-8');;
+                node.send(msg);
+        });
+        return node;
+   }
+   RED.nodes.registerType("btoa",B64EncodeNode);
+   RED.nodes.registerType("atob",B6Decode4Node);
 };

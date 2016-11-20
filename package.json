@@ -10,6 +10,11 @@
     "type": "git",
     "url": "git+ssh://git@github.com/sizrar/node-red-contrib-b64.git"
   },
+  "node-red": {
+    "nodes": {
+      "b64": "b64.js"
+    }
+   },
   "author": "Selim IZRAR <sizrar@gmail.com>",
   "license": "ISC",
   "bugs": {
